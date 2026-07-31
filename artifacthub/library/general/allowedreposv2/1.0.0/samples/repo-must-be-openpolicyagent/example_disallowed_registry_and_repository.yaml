@@ -6,24 +6,32 @@ spec:
   containers:
     - name: image-1-malicious-registry-disallow
       image: myregistry.azurecr.io.malicious.com/malicious-image
+      securityContext:
+        allowPrivilegeEscalation: false
       resources:
         limits:
           cpu: "100m"
           memory: "30Mi"
     - name: image-2-registry-allow
       image: myregistry.azurecr.io/nginx
+      securityContext:
+        allowPrivilegeEscalation: false
       resources:
         limits:
           cpu: "200m"
           memory: "50Mi"
     - name: image-3-malicious-image-with-registry-disallow
       image: mydockerhubmalicious/python
+      securityContext:
+        allowPrivilegeEscalation: false
       resources:
         limits:
           cpu: "50m"
           memory: "10Mi"
     - name: image-4-image-with-registry-allow
       image: mydockerhub/python
+      securityContext:
+        allowPrivilegeEscalation: false
       resources:
         limits:
           cpu: "50m"
